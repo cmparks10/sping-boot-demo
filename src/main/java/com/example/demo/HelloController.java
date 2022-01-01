@@ -35,11 +35,7 @@ public class HelloController {
         try {
             final String resourceUrl = "https://pokeapi.co/api/v2/pokemon/bulbasaur";
             RestTemplate restTemplate = new RestTemplate();
-            HttpHeaders headers = new HttpHeaders();
-            headers.add("user-agent", "Application");
-            headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            HttpEntity<String> entity = new HttpEntity<>(headers);
+            HttpEntity<String> entity = setHeaders();
             responseJson = restTemplate.exchange(resourceUrl, HttpMethod.GET, entity, String.class);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -47,8 +43,14 @@ public class HelloController {
         return responseJson;
     };
 
-    public void setHeaders(){
-        //header logic moved here. This will need to return the entity
+    public static HttpEntity<String> setHeaders(){
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("user-agent", "Application");
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        return entity;
+
     }
 
 }
