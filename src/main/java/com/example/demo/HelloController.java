@@ -28,11 +28,6 @@ public class HelloController {
         return "Greetings from Spring Boot!";
     }
 
-    @GetMapping("/fart")
-    public String secondIndex() {
-        return "This smells like fart!";
-    }
-
     @GetMapping("/testURL")
     public void testURL() throws IOException {
         final String uri = "https://pokeapi.co/api/v2/pokemon/bulbasaur";
