@@ -3,6 +3,7 @@ package com.example.demo.Controller;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -30,10 +31,11 @@ public class HelloController {
     };
 
     @GetMapping(value = "/pokemon")
-    public static ResponseEntity<String> Pokemon() {
+    public static ResponseEntity<String> Pokemon(@RequestParam String Pokemon) {
         ResponseEntity<String> responseJson = null;
         try {
-            final String resourceUrl = "https://pokeapi.co/api/v2/pokemon/bulbasaur";
+            final String resourceUrl = "https://pokeapi.co/api/v2/pokemon/" +Pokemon;
+            //http://localhost:8080/pokemon?Pokemon=
             RestTemplate restTemplate = new RestTemplate();
             HttpEntity<String> entity = setHeaders();
             responseJson = restTemplate.exchange(resourceUrl, HttpMethod.GET, entity, String.class);
